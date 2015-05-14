@@ -5,28 +5,20 @@ context.lineWidth = 5;
 context.lineCap = 'round';
 context.lineJoin="round";
 
-
 var mouse = {x: 0 , y: 0};
 
-/* Mouse Capturing Work */
-
-
+// Mouse Capturing Work
 canvas.addEventListener('mouseout', function(e) {
   canvas.removeEventListener('mousemove', onPaint);
+});
 
-})
-
-/*
-when mouse is moving this finds where the mosue is
-*/
+// When mouse is moving this finds where the mouse is
 canvas.addEventListener('mousemove', function(e) {
   mouse.x = e.pageX - canvas.offsetLeft;
   mouse.y = e.pageY - canvas.offsetTop;
 });
 
-/*
-begins path when mouse is down
-*/
+// Begins path when mouse is down
 canvas.addEventListener('mousedown', function(e) {
     context.moveTo(mouse.x, mouse.y);
     mouse.x = e.pageX - canvas.offsetLeft;
@@ -39,20 +31,25 @@ canvas.addEventListener('mousedown', function(e) {
     canvas.addEventListener('mousemove', onPaint);
 });
 
-
+// Stop drawing when the mouse is released
 canvas.addEventListener('mouseup', function(e) {
     canvas.removeEventListener('mousemove', onPaint);
 });
 
-
+// Draw to the location of the mouse
 var onPaint = function(e) {
   context.lineTo(mouse.x, mouse.y);
   context.stroke();
 }
 
-
+// Clear the board to being white again
 function clearCanvas() {
   context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Changes the color, a string with the color name can be used instead 
+function changeColor(color) {
+  context.strokeStlye = color;
 }
 
 function changeRed() {
